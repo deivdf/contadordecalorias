@@ -1,14 +1,16 @@
-import './App.css'
+import { useReducer } from 'react'
 import Formulario from './components/Formulario'
+import { ActivityReducer, initialState} from './reducers/activity-reducer'
 
 function App() {
-
-
+// uso de useReducer 
+const [state, dispatch] = useReducer(ActivityReducer, initialState);
+console.log('este es el:', state)
   return (
     <>
-      <header className=' bg-orange-600 py-3'>
+      <header className='bg-orange-600 py-5'>
         <div className='max-w-4xl mx-auto flex justify-between'>
-          <h1 className='text-center text-lg font-bold text-white uppercase'>
+          <h1 className='text-lg font-bold text-white uppercase'>
             Contador de calorias
           </h1>
         </div>
@@ -16,7 +18,9 @@ function App() {
 
       <section className='bg-orange-500 py-20 px-5'>
         <div className='max-w-4xl mx-auto'>
-          <Formulario />
+          <Formulario
+          dispatch={dispatch}
+          />
         </div>
       </section>
     </>

@@ -1,5 +1,5 @@
 import type { Category } from "../types/type"
-
+// arreglo de actividades para exportar
 export const categorys: Category[] = [
     {
         id: 1,
