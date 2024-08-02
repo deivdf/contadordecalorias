@@ -5,7 +5,6 @@ import { ActivityReducer, initialState} from './reducers/activity-reducer'
 function App() {
 // uso de useReducer 
 const [state, dispatch] = useReducer(ActivityReducer, initialState);
-console.log('este es el:', state)
   return (
     <>
       <header className='bg-orange-600 py-5'>

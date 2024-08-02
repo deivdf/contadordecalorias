@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FormEvent, Dispatch} from "react"
+import {v4 as uuidv4 } from "uuid"
 import { Activity } from "../types/type"
 import { categorys } from "../data/category"
 import { ActivityAction } from "../reducers/activity-reducer"
@@ -6,14 +7,24 @@ import { ActivityAction } from "../reducers/activity-reducer"
 type Formsprop ={
   dispatch: Dispatch<ActivityAction>
 }
+/*estaforma tambie se usa dentro del state
+  const [data, setData] = useState<Activity>({
+  category: 1,
+  name: '',
+  calorias: 0
+})
+*/
+const initialState: Activity = {
+  // se asigna un id en el arreglo
+  id: uuidv4(),
+  category: 1,
+  name: '',
+  calorias: 0
+}
 //se le pasa a la funcion el prop de dispatch que contiene el useReducer
 export default function Formulario({dispatch}: Formsprop) {
   //uso de useState con el type de activitys para darle la estructura de los datos
-  const [data, setData] = useState<Activity>({
-    category: 1,
-    name: '',
-    calorias: 0
-  })
+  const [data, setData] = useState<Activity>(initialState)
   // funcion handle para determinar si el id del selector
   const handlecange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
     //parsea el dato y si es un numero lo envia a data para guardarlo en el state
@@ -36,8 +47,15 @@ export default function Formulario({dispatch}: Formsprop) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) =>{
     //funcion e para que este atento de cuando se guarden los datos solo escucha
     e.preventDefault()
-    //llamado a dispatch que es el promp
-    dispatch({type: 'save-activity', payload: {newActivity: data}})
+    //llamado a dispatch que es el promp para enviar los datos del formulario a activity reducer y al App.tsx
+    dispatch({type: 'save-activity', payload: {newActivity: data}});
+    //se limpian los datos en el formulario enviado en el setData
+    setData({
+      //guarda un una copia del state con el idd
+      ...initialState,
+      //asigna un id nuevo del que lla esta gurdo en la copia para que no se repita
+      id: uuidv4()
+    });
   }
 
 

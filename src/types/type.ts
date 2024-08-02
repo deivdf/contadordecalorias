@@ -4,6 +4,7 @@ export type Category = {
 }
 // uso de types
 export type Activity = {
+    id: string,
     category: number,
     name: string,
     calorias: number
