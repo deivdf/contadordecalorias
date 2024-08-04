@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent, Dispatch} from "react"
 import {v4 as uuidv4 } from "uuid"
 import { Activity } from "../types/type"
-import { categorys } from "../data/category"
+import { categoris } from "../data/category"
 import { ActivityAction } from "../reducers/activity-reducer"
 // uso de taype para nicializar el dispatch
 type Formsprop ={
@@ -73,7 +73,7 @@ export default function Formulario({dispatch}: Formsprop) {
             value={data.category}
             onChange={handlecange}
             >
-                {categorys.map(category => (
+                {categoris.map(category => (
                     <option 
                     key={category.id}
                     value={category.id}

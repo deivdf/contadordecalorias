@@ -1,10 +1,12 @@
 import { useReducer } from 'react'
 import Formulario from './components/Formulario'
+import Activitys from './components/Activitys';
 import { ActivityReducer, initialState} from './reducers/activity-reducer'
 
 function App() {
 // uso de useReducer 
 const [state, dispatch] = useReducer(ActivityReducer, initialState);
+//dispatch llama a las acciones del reducer
   return (
     <>
       <header className='bg-orange-600 py-5'>
@@ -21,6 +23,9 @@ const [state, dispatch] = useReducer(ActivityReducer, initialState);
           dispatch={dispatch}
           />
         </div>
+      </section>
+      <section className='p-10 mx-auto max-w-4xl'>
+        <Activitys activities={state.activities}/>
       </section>
     </>
   )
