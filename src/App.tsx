@@ -25,7 +25,9 @@ const [state, dispatch] = useReducer(ActivityReducer, initialState);
         </div>
       </section>
       <section className='p-10 mx-auto max-w-4xl'>
-        <Activitys activities={state.activities}/>
+        <Activitys 
+          activities={state.activities}
+          dispatch={dispatch}/>
       </section>
     </>
   )
