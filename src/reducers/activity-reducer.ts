@@ -4,7 +4,8 @@ export type ActivityAction =
     //aqui se guarda el arreglo en el payload
     { type: 'save-activity', payload: { newActivity: Activity } }|
     { type: 'save-activiId', payload: { id: Activity['id'] } } |
-    { type: 'delete-activity', payload: { id: Activity['id'] }}
+    { type: 'delete-activity', payload: { id: Activity['id'] }} |
+    { type: 'reiniciar-app' }
 // este taype ejecuta el activity es la actividad que se utiliza
 export type ActivityState = {
     activities: Activity[]
@@ -68,6 +69,12 @@ export const ActivityReducer = (
             ...state,
             //obtiene el id y lo filtra
             activities: state.activities.filter(activity => activity.id !== action.payload.id)
+        }
+    }
+    if (action.type === 'reiniciar-app'){
+        return {
+            activities: [],
+            activiId: ''
         }
     }
     //retorna el state global
