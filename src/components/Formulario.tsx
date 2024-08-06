@@ -1,11 +1,12 @@
-import { useState, ChangeEvent, FormEvent, Dispatch} from "react"
+import { useState, ChangeEvent, FormEvent, Dispatch, useEffect} from "react"
 import {v4 as uuidv4 } from "uuid"
 import { Activity } from "../types/type"
 import { categoris } from "../data/category"
-import { ActivityAction } from "../reducers/activity-reducer"
+import { ActivityAction, ActivityState } from "../reducers/activity-reducer"
 // uso de taype para nicializar el dispatch
-type Formsprop ={
-  dispatch: Dispatch<ActivityAction>
+type Formsprop = {
+  dispatch: Dispatch<ActivityAction>,
+  state: ActivityState
 }
 /*estaforma tambie se usa dentro del state
   const [data, setData] = useState<Activity>({
@@ -22,9 +23,17 @@ const initialState: Activity = {
   calorias: 0
 }
 //se le pasa a la funcion el prop de dispatch que contiene el useReducer
-export default function Formulario({dispatch}: Formsprop) {
+export default function Formulario({dispatch, state}: Formsprop) {
   //uso de useState con el type de activitys para darle la estructura de los datos
   const [data, setData] = useState<Activity>(initialState)
+  //este useEfect se ejecutara cundo se recibe un id
+  useEffect(()=>{
+    if(state.activiId){
+      //se filtra el id con el id de actividades con el seleccionado
+      const selectedActivity = state.activities.filter(stateActivity => stateActivity.id === state.activiId)[0]
+      setData(selectedActivity)
+    }
+  },[state.activiId])
   // funcion handle para determinar si el id del selector
   const handlecange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
     //parsea el dato y si es un numero lo envia a data para guardarlo en el state

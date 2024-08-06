@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer, useEffect } from 'react'
 import Formulario from './components/Formulario'
 import Activitys from './components/Activitys';
 import { ActivityReducer, initialState} from './reducers/activity-reducer'
@@ -6,6 +6,11 @@ import { ActivityReducer, initialState} from './reducers/activity-reducer'
 function App() {
 // uso de useReducer 
 const [state, dispatch] = useReducer(ActivityReducer, initialState);
+
+//local storage para gurdado dinamico en el navegador
+useEffect(()=>{
+  localStorage.setItem('activities',JSON.stringify(state.activities))
+},[state.activities])
 //dispatch llama a las acciones del reducer
   return (
     <>
@@ -21,6 +26,7 @@ const [state, dispatch] = useReducer(ActivityReducer, initialState);
         <div className='max-w-4xl mx-auto'>
           <Formulario
           dispatch={dispatch}
+          state={state}
           />
         </div>
       </section>
