@@ -1,12 +1,16 @@
-import { useReducer, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import Formulario from './components/Formulario'
 import Activitys from './components/Activitys';
-import { ActivityReducer, initialState} from './reducers/activity-reducer'
+//import { ActivityReducer, initialState} from './reducers/activity-reducer'
 import CaloriTracer from './components/CaloriTracer';
+import { useActivity } from './hook/useActivity';
 
 function App() {
 // uso de useReducer 
-const [state, dispatch] = useReducer(ActivityReducer, initialState);
+//const [state, dispatch] = useReducer(ActivityReducer, initialState);
+//uso de hook con context
+const { state, dispatch} = useActivity()
+
 const canrestApp = () => useMemo(() => state.activities.length, [state.activities])
 
 //local storage para gurdado dinamico en el navegador
@@ -39,7 +43,6 @@ useEffect(()=>{
       <section className='bg-gray-800 p-10'>
         <div className='max-w-4xl mx-auto'>
           <CaloriTracer 
-            activities={state.activities}
           />
         </div>
       </section>
