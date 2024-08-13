@@ -35,8 +35,6 @@ useEffect(()=>{
       <section className='bg-orange-500 py-20 px-5'>
         <div className='max-w-4xl mx-auto'>
           <Formulario
-          dispatch={dispatch}
-          state={state}
           />
         </div>
       </section>
@@ -47,9 +45,7 @@ useEffect(()=>{
         </div>
       </section>
       <section className='p-10 mx-auto max-w-4xl'>
-        <Activitys 
-          activities={state.activities}
-          dispatch={dispatch}/>
+        <Activitys />
       </section>
     </>
   )

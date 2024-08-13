@@ -1,13 +1,14 @@
-import { useState, ChangeEvent, FormEvent, Dispatch, useEffect} from "react"
+import { useState, ChangeEvent, FormEvent, useEffect} from "react"
 import {v4 as uuidv4 } from "uuid"
 import { Activity } from "../types/type"
 import { categoris } from "../data/category"
-import { ActivityAction, ActivityState } from "../reducers/activity-reducer"
+//import { ActivityAction, ActivityState } from "../reducers/activity-reducer"
+import { useActivity } from "../hook/useActivity"
 // uso de taype para nicializar el dispatch
-type Formsprop = {
-  dispatch: Dispatch<ActivityAction>,
-  state: ActivityState
-}
+// type Formsprop = {
+//   dispatch: Dispatch<ActivityAction>,
+//   state: ActivityState
+// }
 /*estaforma tambie se usa dentro del state
   const [data, setData] = useState<Activity>({
   category: 1,
@@ -23,7 +24,10 @@ const initialState: Activity = {
   calorias: 0
 }
 //se le pasa a la funcion el prop de dispatch que contiene el useReducer
-export default function Formulario({dispatch, state}: Formsprop) {
+//export default function Formulario({dispatch, state}: Formsprop)
+export default function Formulario() {
+  //importacion del context estado global
+  const {state, dispatch} = useActivity()
   //uso de useState con el type de activitys para darle la estructura de los datos
   const [data, setData] = useState<Activity>(initialState)
   //este useEfect se ejecutara cundo se recibe un id
